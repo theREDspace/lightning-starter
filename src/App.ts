@@ -10,16 +10,17 @@ export class App extends Lightning.Application {
         x: 1920 / 2,
         y: 1080 / 2,
         w: 400, h: 300,
+        flex: {
+          direction: 'column'
+        },
         Element2: {
           color: 0xffff0000,
-          // X,Y relative to parent:
-          x: 200,
-          y: 300,
-          mountX: 0.5, // Use x as centre
-          mountY: 1, // Use y as bottom
           text: { text: 'Hello World!' }
         },
         Element3: {
+          flexItem: {
+            marginTop: 15
+          },
           src: './logo.png'
         }
       },
