@@ -20,6 +20,12 @@ export class CarouselGrid extends lightning.Component {
         flex: {
           direction: 'column',
           padding: 20
+        },
+        Row: {
+          type: CarouselRow,
+          signals: {
+            selectionChanged: true,
+          }
         }
       }
     }
@@ -27,18 +33,20 @@ export class CarouselGrid extends lightning.Component {
 
   _active() {
     const rows = this.tag('Rows')!
-    rows.children = data.map(row => ({
-      type: CarouselRow,
-      title: row.title,
-      items: row.items.map(item => ({
-        type: CarouselItem,
-        title: item.title,
-        image: item.image
-      })),
-      signals: {
-        'selectionChanged': true // true means the callback function name matches the signal name
-      }
-    }))
+    rows.patch({
+      children: data.map(row => ({
+        type: CarouselRow,
+        title: row.title,
+        items: row.items.map(item => ({
+          type: CarouselItem,
+          title: item.title,
+          image: item.image
+        })),
+        signals: {
+          'selectionChanged': true // true means the callback function name matches the signal name
+        }
+      }))
+    })
   }
 
   _handleKey(e: KeyboardEvent) {

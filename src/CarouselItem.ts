@@ -5,11 +5,15 @@ export interface CarouselItemProps extends lightning.Component.TemplateSpec {
   image: string;
 }
 
+const enum flexDirection {
+  Column = 'column'
+}
+
 export class CarouselItem extends lightning.Component<CarouselItemProps> {
   static _template() {
     return {
       flex: {
-        direction: 'column',
+        direction: flexDirection.Column,
         padding: 10
       },
       Image: {

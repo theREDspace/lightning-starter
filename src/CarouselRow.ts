@@ -1,15 +1,26 @@
 import lightning from "@lightningjs/core"
 
+interface CarouselRowSignalMap extends lightning.Component.SignalMap {
+  selectionChanged(name: string): void;
+}
+
+interface CarouselRowTypeConfig extends lightning.Component.TypeConfig {
+  SignalMapType: CarouselRowSignalMap;
+}
+
+interface CarouselRowProps extends lightning.Component.TemplateSpec {
+}
+
 const shiftAmount = 245
 
-export class CarouselRow extends lightning.Component {
+export class CarouselRow extends lightning.Component<CarouselRowProps, CarouselRowTypeConfig> {
   selectedItem = 0;
 
   static _template() {
     return {
       clipping: true,
       flex: {
-        direction: 'column'
+        direction: 'column' as const
       },
       Title: {
         text: { text: this.bindProp('title') }
@@ -39,7 +50,7 @@ export class CarouselRow extends lightning.Component {
     if (!carousel.transition('x').isRunning()) {
       this.selectedItem = Math.min(Math.max(newIndex, 0), carousel.children.length - 1)
       carousel.setSmooth('x', this.selectedItem * -shiftAmount)
-      this.signal('selectionChanged')
+      this.signal('selectionChanged', 'foobar')
     }
     return true;
   }
