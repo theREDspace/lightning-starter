@@ -1,23 +1,23 @@
-import lightning from "@lightningjs/core"
+import Lightning from '@lightningjs/core';
 
-export interface CarouselItemProps extends lightning.Component.TemplateSpec {
+export interface CarouselItemProps extends Lightning.Component.TemplateSpec {
   title: string;
   image: string;
 }
 
 const enum flexDirection {
-  Column = 'column'
+  Column = 'column',
 }
 
-export class CarouselItem extends lightning.Component<CarouselItemProps> {
+export class CarouselItem extends Lightning.Component<CarouselItemProps> {
   static _template() {
     return {
       flex: {
         direction: flexDirection.Column,
-        padding: 10
+        padding: 10,
       },
       Image: {
-        src: this.bindProp('image')
+        src: this.bindProp('image'),
       },
       Title: {
         text: {
@@ -25,9 +25,9 @@ export class CarouselItem extends lightning.Component<CarouselItemProps> {
           fontSize: 20,
           wordWrap: false,
           textOverflow: 'ellipsis',
-          wordWrapWidth: 200
-        }
-      }
-    }
+          wordWrapWidth: 200,
+        },
+      },
+    };
   }
 }

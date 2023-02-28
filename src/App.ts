@@ -1,9 +1,9 @@
-import Lightning from '@lightningjs/core'
-import { data } from './ApiData'
-import { CarouselGrid } from './CarouselGrid'
+import Lightning from '@lightningjs/core';
+import { data } from './ApiData';
+import { CarouselGrid } from './CarouselGrid';
 
 export class App extends Lightning.Application {
-  descriptionText = data[0].items[0].description
+  descriptionText = data[0].items[0].description;
 
   static override _template() {
     return {
@@ -14,23 +14,23 @@ export class App extends Lightning.Application {
           text: this.bindProp('descriptionText'),
           wordWrap: true,
           wordWrapWidth: 1200,
-          maxLines: 3
-        }
+          maxLines: 3,
+        },
       },
-      Grid: { 
+      Grid: {
         type: CarouselGrid,
         signals: {
-          'setDescription': true
-        }
-      }
-    }
+          setDescription: true,
+        },
+      },
+    };
   }
 
   setDescription(text: string) {
-    this.descriptionText = text
+    this.descriptionText = text;
   }
 
   _getFocused() {
-    return this.tag('Grid')
+    return this.tag('Grid');
   }
 }
