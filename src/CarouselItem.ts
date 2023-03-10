@@ -21,6 +21,7 @@ export class CarouselItem extends Lightning.Component<CarouselItemProps> {
       },
       Title: {
         text: {
+          // See: https://lightningjs.io/docs/#/lightning-core-reference/RenderEngine/Textures/Text
           text: this.bindProp('title'),
           fontSize: 20,
           wordWrap: false,

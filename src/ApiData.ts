@@ -1,4 +1,5 @@
-export const data = [
+// Generated Mock API data
+const data = [
   {
     title: 'deserunt',
     items: [
@@ -325,3 +326,7 @@ export const data = [
     ],
   },
 ];
+
+export function fetchData() {
+  return Promise.resolve(data);
+}

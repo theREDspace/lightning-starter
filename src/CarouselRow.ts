@@ -1,14 +1,23 @@
 import Lightning from '@lightningjs/core';
+import { CarouselItem, CarouselItemProps } from './CarouselItem';
 
+// See: https://lightningjs.io/docs/#/lightning-core-reference/TypeScript/Components/TypeConfigs?id=signal-maps
 interface CarouselRowSignalMap extends Lightning.Component.SignalMap {
-  selectionChanged(name: string): void;
+  selectionChanged(): void;
 }
 
+// See: https://lightningjs.io/docs/#/lightning-core-reference/TypeScript/Components/TypeConfigs
 interface CarouselRowTypeConfig extends Lightning.Component.TypeConfig {
   SignalMapType: CarouselRowSignalMap;
 }
 
-interface CarouselRowProps extends Lightning.Component.TemplateSpec {}
+// See: https://lightningjs.io/docs/#/lightning-core-reference/TypeScript/Components/TemplateSpecs
+interface CarouselRowProps extends Lightning.Component.TemplateSpec {
+  items: [CarouselItemProps];
+  Carousel: {
+    children: [typeof CarouselItem];
+  };
+}
 
 const shiftAmount = 245;
 
@@ -16,7 +25,11 @@ export class CarouselRow extends Lightning.Component<
   CarouselRowProps,
   CarouselRowTypeConfig
 > {
-  selectedItem = 0;
+  private _selectedIndex = 0;
+
+  get selectedItem() {
+    return this.tag('Carousel')!.children[this._selectedIndex];
+  }
 
   static _template() {
     return {
@@ -41,21 +54,21 @@ export class CarouselRow extends Lightning.Component<
     let newIndex: number;
     switch (e.key) {
       case 'ArrowLeft':
-        newIndex = this.selectedItem - 1;
+        newIndex = this._selectedIndex - 1;
         break;
       case 'ArrowRight':
-        newIndex = this.selectedItem + 1;
+        newIndex = this._selectedIndex + 1;
         break;
       default:
         return false;
     }
     if (!carousel.transition('x').isRunning()) {
-      this.selectedItem = Math.min(
+      this._selectedIndex = Math.min(
         Math.max(newIndex, 0),
         carousel.children.length - 1
       );
-      carousel.setSmooth('x', this.selectedItem * -shiftAmount);
-      this.signal('selectionChanged', 'foobar');
+      carousel.setSmooth('x', this._selectedIndex * -shiftAmount);
+      this.signal('selectionChanged');
     }
     return true;
   }

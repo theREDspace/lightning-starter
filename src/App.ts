@@ -1,9 +1,8 @@
 import Lightning from '@lightningjs/core';
-import { data } from './ApiData';
 import { CarouselGrid } from './CarouselGrid';
 
 export class App extends Lightning.Application {
-  descriptionText = data[0].items[0].description;
+  descriptionText: string;
 
   static override _template() {
     return {

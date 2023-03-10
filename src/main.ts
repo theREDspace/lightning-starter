@@ -1,6 +1,7 @@
 import { App } from './App';
 
 window.addEventListener('DOMContentLoaded', () => {
+  // See: https://lightningjs.io/docs/#/lightning-core-reference/RuntimeConfig/index
   const app = new App({
     stage: {
       w: 1920,
@@ -11,5 +12,6 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     debug: true,
   });
+
   document.body.appendChild(app.stage.getCanvas());
 });
